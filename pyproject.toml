@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "bn-job-recommendation"
+name = "Bright Network Challenge"
 version = "0.1.0"
 description = ""
 authors = ["Dan Mazzei <danielmazzei@gmail.com>"]
@@ -11,6 +11,9 @@ python = "3.11.10"
 pydantic = "^2.9.2"
 requests = "^2.32.3"
 spacy = "^3.8.2"
+click = "^8.1.7"
+fuzzywuzzy = "^0.18.0"
+python-levenshtein = "^0.26.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.3"
