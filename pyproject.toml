@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "bn-job-recommendation"
+version = "0.1.0"
+description = ""
+authors = ["Dan Mazzei <danielmazzei@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "3.11.10"
+pydantic = "^2.9.2"
+requests = "^2.32.3"
+spacy = "^3.8.2"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+requests-mock = "^1.12.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+prettier = "^0.0.7"
+mypy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
