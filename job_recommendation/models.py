@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 
 
@@ -16,3 +17,13 @@ class Job(BaseModel):
     def __repr__(self) -> str:
         return f"{self.title} ({self.location})"
 
+
+class JobLocationPreferences(BaseModel):
+    positive: List
+    negative: List
+
+  
+class JobPreferences(BaseModel):
+    locations: JobLocationPreferences
+    titles: List
+    
