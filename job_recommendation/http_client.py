@@ -1,8 +1,9 @@
-import requests
 import logging
+from typing import Any, List
 
+import requests  # type: ignore
 from pydantic import ValidationError
-from typing import List, Any
+
 from job_recommendation.models import Job, Member
 
 logger = logging.getLogger("HTTP Client")
@@ -28,11 +29,11 @@ class Client:
         except ValidationError as err:
             logger.error(f"Pydantic validation error: {err}")
             return None
-    
+
     @classmethod
     def _get(cls, endpoint: str) -> Any:
         return cls._fetch_json_data(cls.BASE_URL + endpoint)
-    
+
     @classmethod
     def _fetch_json_data(cls, url: str):
         try:

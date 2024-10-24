@@ -1,4 +1,5 @@
 from typing import List
+
 from pydantic import BaseModel
 
 
@@ -22,8 +23,7 @@ class JobLocationPreferences(BaseModel):
     positive: List
     negative: List
 
-  
+
 class JobPreferences(BaseModel):
     locations: JobLocationPreferences
     titles: List
-    
