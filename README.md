@@ -1,6 +1,6 @@
 # Bright Network Hiring Challenge - Job Recommendations Algorithm
 
-> In one of our suggested programming languages, please implement a **very simple** recommendations algorithm to match members to their perfect job. 
+> In one of our suggested programming languages, please implement a **very simple** recommendations algorithm to match members to their perfect job.
 
 <details>
 <summary>Click to toggle the challenge description</summary>
@@ -53,6 +53,11 @@ Please work in a git repository, and share this with us via either a link or zip
     ```
 
     This will also install the required pre-trained language models.
+<br><br>
+    You can see all available commands using:
+    ```bash
+    make help
+    ```
 
 
 ### Running the tests
@@ -61,6 +66,12 @@ This will run all existing unit-tests in `verbose` mode:
 
 ```bash
 make test
+```
+
+or you can invoke it directly using poetry:
+
+```bash
+poetry run pytest
 ```
 
 
@@ -77,6 +88,13 @@ Or you can use explore the additional arguments the algorithm accepts using:
 ```bash
 poetry run python main.py --help
 ```
+
+I find that this combinations gives the best recommendation visibility:
+
+```bash
+poetry run python main.py -vl
+```
+
 <br><br><br>
 
 # Thoughts on the proposed solution
@@ -85,7 +103,7 @@ poetry run python main.py --help
 
 1. Simple CLI to run the algorithm via terminal, as the boilerplate of creating a web UI, for example, would be too time-consuming for its benefits.
 
-2. To fetch the required data, I decided to use a very simple `http_client`, implementing only the `get` method, as the test app doesn't require any authentication. 
+2. To fetch the required data, I decided to use a very simple `http_client`, implementing only the `get` method, as the test app doesn't require any authentication.
 
 3. To parse the text data within the candidate's bio, I decided to use `spaCy` [spacy.io](https://spacy.io/) for basic NLP implementation, given how quick and flexible it is to start using it. Mainly to take advantage of GPE POS tags to identify "locations" easily. And it also allowed me to use pre-defined patterns used in custom matchers, for a simpler solution.
 
@@ -93,9 +111,9 @@ poetry run python main.py --help
 
 5. The "job title" matching is done using `fuzzywuzzy`, for its quick implementation and decent results when combined with `python-levenshtein`.
 
-6. Matching algorithm: I implemented a simple score system, fine-tuned using matching ratios and weights. The "Job Title" has preference over location, so to an exact match, 1 point is added to the score. Otherwise the fuzzy matching score is used (if it's above the stipulated threshold - `60`). The "Job Location" weight is configurable, but the default value used is `0.5`. 
+6. Matching algorithm: I implemented a simple score system, fine-tuned using matching ratios and weights. The "Job Title" has preference over location, so to an exact match, 1 point is added to the score. Otherwise the fuzzy matching score is used (if it's above the stipulated threshold - `60`). The "Job Location" weight is configurable, but the default value used is `0.5`.
 
-7. To generate the recommendation list, all jobs are scored as a match for the candidate, this list is then sorted and filtered. 
+7. To generate the recommendation list, all jobs are scored as a match for the candidate, this list is then sorted and filtered.
 
 <br><br>
 
@@ -105,7 +123,7 @@ poetry run python main.py --help
 
 2. The implementation of NLP used in the "bio" parser is rudimentary and simplistic. Trained models or more complex patterns would significantly improve the data extraction and matching. Also a more well-thought parsing of negation, context and duplications would give more accurate results.
 
-3. Given the time constraints and the recommendation for a "simple solution", I did not focus on performance, memory- or cpu-usage. 
+3. Given the time constraints and the recommendation for a "simple solution", I did not focus on performance, memory- or cpu-usage.
 
 4. I tried to use type-hints as much as I could and enforce it properly, but I didn't have time to add linters to ensure nothing escaped my attention.
 
@@ -119,4 +137,4 @@ poetry run python main.py --help
 * Add additional data source options
 * Add more tests for exceptions and edge cases
 * Add asyncio, to avoid time waste with sequential API response waiting
-* Add pre-hooks (`pre-commit`) to run linters before commiting and pushing the code
+* ~~Add pre-hooks (`pre-commit`) to run linters before commiting and pushing the code~~
